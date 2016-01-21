@@ -12,11 +12,12 @@
 # License: MIT
 
 # You should create a backup user that only has read priviledges
-USER=root
-PASSWORD=
 
-# Initialize the target directory
 DIR=${1%/}
+USER="$2"
+PASSWORD="$3"
+
+USAGE=$'\n\nUsage:\n  mysql-backupall.sh <DIR> <USER> <PASSWORD>\n'
 
 if [[ -z "$DIR" ]]; then
   echo "No directory defined!${USAGE}"
@@ -25,6 +26,11 @@ fi
 
 if [ ! -d $DIR ]; then 
   echo "Target directory does not exist: ${DIR}"
+  exit 1
+fi
+
+if [[ -z "$USER" ]]; then
+  echo "No backup user defined!${USAGE}"
   exit 1
 fi
 

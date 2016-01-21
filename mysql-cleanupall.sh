@@ -15,6 +15,8 @@ LIMIT="$1"
 DIR=${2%/}
 BASEDIR=$(dirname $0)
 
+USAGE=$'\n\nUsage:\n  mysql-cleanupall.sh <LIMIT> <DIRECTORY>\n'
+
 if [[ -z "$LIMIT" ]]; then
   echo "No limit defined!${USAGE}"
   exit 1
