@@ -5,17 +5,17 @@
 #
 # Usage:
 #
-#   cleanup.sh <LIMIT> <BASENAME> <DIRECTORY>
+#   cleanup.sh <DIRECTORY> <BASENAME> <LIMIT>
 # 
 # Copyright: ZeyOS, Inc. 2016
 # Author: Peter-Christoph Haider <peter.haider@zeyos.com>
 # License: MIT
 
-LIMIT="$1"
+DIR=${1%/}
 BASENAME="$2"
-DIR=${3%/}
+LIMIT="$3"
 
-USAGE=$'\n\nUsage:\n  cleanup.sh <LIMIT> <BASENAME> <DIRECTORY>\n'
+USAGE=$'\n\nUsage:\n  cleanup.sh <DIRECTORY> <BASENAME> <LIMIT>\n'
 
 if [[ -z "$LIMIT" ]]; then
   echo "No limit defined!${USAGE}"

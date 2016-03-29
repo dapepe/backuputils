@@ -5,17 +5,17 @@
 #
 # Usage:
 #
-#   mysql-cleanupall.sh <LIMIT> <DIRECTORY>
+#   mysql-cleanupall.sh <DIRECTORY> <LIMIT>
 # 
 # Copyright: ZeyOS, Inc. 2016
 # Author: Peter-Christoph Haider <peter.haider@zeyos.com>
 # License: MIT
 
-LIMIT="$1"
-DIR=${2%/}
+DIR=${1%/}
+LIMIT="$2"
 BASEDIR=$(dirname $0)
 
-USAGE=$'\n\nUsage:\n  mysql-cleanupall.sh <LIMIT> <DIRECTORY>\n'
+USAGE=$'\n\nUsage:\n  mysql-cleanupall.sh <DIRECTORY> <LIMIT>\n'
 
 if [[ -z "$LIMIT" ]]; then
   echo "No limit defined!${USAGE}"
@@ -41,7 +41,7 @@ fi
 DATABASES=$(mysql --user=${USER} --password=${PASS} -Bse 'show databases')
 
 for DATABASE in $DATABASES; do
-  sh $BASEDIR/cleanup.sh $LIMIT $DATABASE $DIRECTORY
+  sh $BASEDIR/cleanup.sh $DIRECTORY $DATABASE $LIMIT
 done
 
 exit 0
